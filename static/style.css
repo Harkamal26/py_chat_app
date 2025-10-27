@@ -1,0 +1,64 @@
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right,#dbeafe,#eff6ff);
+  margin: 0; padding: 0;
+}
+.container {
+  width: 420px;
+  margin: 40px auto;
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+h2, h3 { text-align:center; color:#333; }
+.flash { background:#ffe0e0; color:red; padding:8px; border-radius:5px; }
+input,button {
+  padding:10px; border-radius:8px; border:1px solid #ccc;
+}
+button {
+  background:#007bff; color:white; border:none; cursor:pointer;
+}
+button:hover { background:#0056b3; }
+.chat-header {
+  font-weight:bold;
+  background:#007bff;
+  color:white;
+  padding:10px;
+  border-radius:6px;
+}
+.chat-log {
+  height:380px; overflow-y:auto;
+  background:#fafafa;
+  border:1px solid #ccc;
+  margin-top:10px;
+  padding:10px;
+  border-radius:6px;
+}
+.msg-row { margin-bottom:10px; }
+.msg-bubble {
+  padding:10px; border-radius:10px;
+  max-width:70%;
+  word-wrap:break-word;
+}
+.msg-bubble.self {
+  background:#aee1f9;
+  float:right; clear:both;
+}
+.msg-bubble.other {
+  background:#f1f1f1;
+  float:left; clear:both;
+}
+.msg-meta { font-size:10px; color:gray; margin-top:4px; }
+.tick-single { color:gray; }
+.tick-double { color:gray; }
+.tick-double.seen { color:#1e90ff; }
+.chat-box {
+  display:flex; gap:5px;
+  margin-top:10px;
+}
+.chat-box input[type=text] {
+  flex:1; padding:8px;
+}
+.user-list a { text-decoration:none; color:#007bff; }
+.user-list a:hover { text-decoration:underline; }
