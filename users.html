@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Users</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="container">
+  <div class="chat-header">
+    Welcome, {{ session.user }}
+    <span style="float:right"><a href="/logout" style="color:white;">Logout</a></span>
+  </div>
+  <h3>Select a user to chat:</h3>
+  <ul class="user-list">
+    {% for u in users %}
+      <li>
+        <a href="/chat/{{u['username']}}">{{u['username']}}</a>
+        — <small>{{u['last_seen']}}</small>
+      </li>
+    {% else %}
+      <li>No users found.</li>
+    {% endfor %}
+  </ul>
+</div>
+</body>
+</html>

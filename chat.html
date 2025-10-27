@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Chat with {{ receiver }}</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="container">
+  <div class="chat-header">
+    Chat with {{ receiver }}
+    <span style="float:right">
+      <a href="/users" style="color:white;">Back</a>
+    </span>
+  </div>
+
+  <div style="margin:10px 0;">
+    <form method="GET" action="{{ url_for('chat', receiver=receiver) }}" style="display:flex;gap:8px;">
+      <input type="text" name="q" placeholder="Search messages" value="{{ request.args.get('q','') }}">
+      <button type="submit">Search</button>
+    </form>
+  </div>
+
+  <div class="chat-log" id="chat-log">
+    {% for r in chat %}
+      <div class="msg-row">
+        <div class="msg-bubble {% if r['sender']==session.user %}self{% else %}other{% endif %}">
+          {% if r['message'] %}<p>{{r['message']}}</p>{% endif %}
+          {% if r['file_path'] %}
+            {% if r['file_type']=='image' %}
+              <img src="/uploads/{{r['file_path']}}" width="200">
+            {% elif r['file_type']=='audio' %}
+              <audio controls src="/uploads/{{r['file_path']}}"></audio>
+            {% elif r['file_type']=='video' %}
+              <video width="240" controls><source src="/uploads/{{r['file_path']}}"></video>
+            {% else %}
+              <a href="/uploads/{{r['file_path']}}" target="_blank">📂 Download</a>
+            {% endif %}
+          {% endif %}
+          <div class="msg-meta">
+            {{r['timestamp']}}
+            {% if r['sender']==session.user %}
+              {% if r['status']=='sent' %}
+                <span class="tick-single">✓</span>
+              {% elif r['status']=='delivered' %}
+                <span class="tick-double">✓✓</span>
+              {% elif r['status']=='seen' %}
+                <span class="tick-double seen">✓✓</span>
+              {% endif %}
+            {% endif %}
+          </div>
+        </div>
+        <div style="clear:both"></div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <form class="chat-box" method="POST" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <input type="text" name="message" placeholder="Type message">
+    <button type="submit">Send</button>
+  </form>
+</div>
+<script>
+window.addEventListener('load', ()=>{
+  fetch('/mark_seen', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({partner:'{{receiver}}'})
+  });
+});
+</script>
+</body>
+</html>

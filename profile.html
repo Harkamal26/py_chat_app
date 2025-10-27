@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Profile Settings</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+<div class="chat-header">Profile Settings <span style="float:right"><a href="{{ url_for('users') }}">Back</a></span></div>
+{% with messages=get_flashed_messages() %}
+{% if messages %}<div class="flash">{% for m in messages %}<p>{{m}}</p>{% endfor %}</div>{% endif %}
+{% endwith %}
+<div style="text-align:center;">
+<h3>Current Profile Picture</h3>
+<img src="{{ url_for('profile_picture', filename=current_profile) }}" class="current-avatar">
+</div>
+<form method="POST" enctype="multipart/form-data">
+<div class="file-input-wrapper" onclick="document.getElementById('profileFile').click();">📷 Choose Photo
+<input type="file" id="profileFile" name="profile_picture" accept="image/*" onchange="previewImage(event)">
+</div>
+<img id="preview" class="preview-image" style="display:none;" alt="Preview">
+<button type="submit">Update Profile Picture</button>
+</form>
+</div>
+<script>
+function previewImage(e){
+ const f=e.target.files[0];
+ if(!f)return;
+ const r=new FileReader();
+ r.onload=function(x){const p=document.getElementById('preview');p.src=x.target.result;p.style.display='block';};
+ r.readAsDataURL(f);
+}
+</script>
+</body>
+</html>
