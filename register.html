@@ -1,25 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Register</title>
-<link rel="stylesheet" href="/static/style.css">
+    <title>Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-<div class="container">
-  <h2>Register</h2>
-  {% with messages = get_flashed_messages() %}
+<div class="container form-container">
+    <h2>Create Account</h2>
+{% with messages = get_flashed_messages() %}
     {% if messages %}
       <div class="flash">{% for msg in messages %}<p>{{ msg }}</p>{% endfor %}</div>
     {% endif %}
   {% endwith %}
-  <form method="POST">
-    <label>Username</label>
-    <input name="username" required>
-    <label>Password</label>
-    <input type="password" name="password" required>
-    <button type="submit">Register</button>
-  </form>
-  <p>Already have an account? <a href="/login">Login</a></p>
+    <form method="POST">
+        <label>Username</label>
+        <input type="text" name="username" autofocus required><br>
+      <label>Password</label>
+        <input type="password" name="password" autofocus required><br>
+        <button type="submit" class="hello">Register</button>
+    </form>
+    <style>
+      .hello{
+        width: 420px;
+  margin: 40px auto;
+  background: #0056b3;;
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      }
+    </style>
+    <p>Already have an account? <a href="/login">Login</a></p>
 </div>
 </body>
 </html>

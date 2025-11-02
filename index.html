@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome to ChatWave</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container center">
+    <img src="https://user-gen-media-assets.s3.amazonaws.com/seedream_images/47a1b5ca-da8d-4c28-8805-f682fda44d2a.png" width="100">
+    <h2>ChatWave</h2>
+    <div class="form-buttons">
+      <button type="submit" class ="hello">
+        <a href="/login">Login</a>
+        </button>
+        <button type="submit" class = "hello">
+        <a href="/register">Register</a>
+        </button>
+    </div>
+</div>
+<style>
+  .container{
+    text-align:center;
+  }
+  .hello{
+    background-color:aqua;
+    border:2px solid black;
+    margin: -1px;
+  }
+</style>
+</body>
+</html>

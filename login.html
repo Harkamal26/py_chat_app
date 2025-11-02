@@ -1,25 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Login</title>
-<link rel="stylesheet" href="/static/style.css">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-<div class="container">
-  <h2>Login</h2>
-  {% with messages = get_flashed_messages() %}
+<div class="container form-container">
+    <h2>Login</h2>
+{% with messages = get_flashed_messages() %}
     {% if messages %}
       <div class="flash">{% for msg in messages %}<p>{{ msg }}</p>{% endfor %}</div>
     {% endif %}
   {% endwith %}
-  <form method="POST">
-    <label>Username</label>
-    <input name="username" required autofocus> <br>
-    <label>Password</label>
-    <input type="password" name="password" required>
-    <button type="submit">Login</button>
-  </form>
-  <p>Don't have an account? <a href="/register">Register</a></p>
+    <form method="POST">
+<label>Username</label>
+        <input type="text" name="username" required autofocus><br>
+<label>Password</label>
+        <input type="password" name="password" autofocus required><br>
+        <button class ="hello" type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="/register">Register</a></p>
 </div>
+<style>
+      .hello{
+        width: 420px;
+  margin: 40px auto;
+  background: #0056b3;;
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      }
+    </style>
 </body>
 </html>
